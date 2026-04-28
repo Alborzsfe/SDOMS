@@ -134,4 +134,13 @@ The main goal is to simulate how a microgrid controller ensures balance between 
 
 ## 📜 License
 
+
+
+
+
+## 📄 Project Specification
+
+You can find the full project description here:  
+[Project PDF](docs/FP_Project_Description.pdf)
+
 This project is developed for academic purposes as part of an undergraduate programming course.
