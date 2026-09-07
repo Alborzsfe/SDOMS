@@ -1,146 +1,38 @@
-# SDOMS – Smart Distribution Optimization & Management System
+# SDOMS — Smart Distribution Optimization and Management System
 
-## 📌 Overview
+SDOMS is an educational Python simulation of a simplified microgrid controller. It combines object-oriented device models, graph connectivity checks, power balancing, and priority-based load shedding.
 
-SDOMS is a simulation-based project designed to model the core logic of a smart microgrid Energy Management System (EMS). The system integrates concepts from object-oriented programming, graph algorithms, and power system control to manage distributed energy resources (DERs) and maintain grid stability.
+## Scope and limitations
 
-The main goal is to simulate how a microgrid controller ensures balance between power generation and demand, especially under critical conditions using load shedding strategies.
+This repository is a software simulation, not a validated power-system or under-frequency load-shedding model. It does not model grid frequency or dynamic electrical transients. Reported power values and load-shedding totals must therefore not be interpreted as energy without multiplying by the simulation timestep.
 
----
+## Files
 
-## ⚙️ Key Features
+- `generate_devices.py`: creates deterministic example devices
+- `generate_topology.py`: creates a connected example topology without self-loops
+- `sdoms.py`: runs the simulation using `devices.csv` and `topology.csv`
+- `FP.pdf`: original project report
 
-* **Object-Oriented Design**
+Generated CSV files, plots, and simulation results are excluded from Git.
 
-  * Abstract base class (`EnergyNode`)
-  * Derived classes (`Source`, `Load`)
-  * Bitwise state management for device status
+## Setup and run
 
-* **Graph-Based Connectivity Verification**
-
-  * Adjacency list representation
-  * Recursive Depth-First Search (DFS) to ensure connection to main grid
-
-* **Custom Load Shedding Algorithm**
-
-  * Manual implementation of sorting (Bubble/Selection Sort)
-  * Priority-based and demand-based load shedding
-  * Under-Frequency Load Shedding (UFLS) simulation
-
-* **Energy Analysis**
-
-  * Calculation of Energy Not Served (ENS)
-  * Functional programming (`filter`, `map`, `reduce`)
-
-* **Cross-Platform Visualization**
-
-  * Export simulation results to CSV
-  * MATLAB-based visualization for:
-
-    * Power balance
-    * Load shedding distribution
-
----
-
-## 📂 Project Structure
-
-```
-.
-├── devices.csv                # Input: devices (sources & loads)
-├── topology.csv              # Input: network connections
-├── simulation_results.csv    # Output: simulation results
-├── error_log.txt             # Parsing errors
-├── main.py                   # Main simulation script
-├── visualize_grid.m          # MATLAB visualization script
-└── README.md
+```bash
+git clone https://github.com/Alborzsfe/SDOMS.git
+cd SDOMS
+python -m venv .venv
+pip install -r requirements.txt
+python generate_devices.py
+python generate_topology.py
+python sdoms.py
 ```
 
----
+The generators use a fixed random seed so the example input is reproducible.
 
-## 🚀 How It Works
+## Quality check
 
-1. **Data Ingestion**
+GitHub Actions performs syntax compilation. A scientifically meaningful validation suite will require documented reference scenarios and expected numerical outputs.
 
-   * Parse `devices.csv` and instantiate objects
-   * Build network graph from `topology.csv`
+## License
 
-2. **Connectivity Check**
-
-   * Run DFS to verify nodes are connected to main grid
-
-3. **Power Balance Calculation**
-
-   * Compute total generation and demand
-
-4. **Load Shedding (if needed)**
-
-   * Sort loads based on priority and demand
-   * Iteratively turn off loads until balance is restored
-
-5. **Post-Processing**
-
-   * Calculate ENS
-   * Export results to CSV
-
-6. **Visualization**
-
-   * Use MATLAB script to generate plots
-
----
-
-## 🧠 Core Concepts
-
-* Smart Microgrids
-* Energy Management Systems (EMS)
-* Graph Traversal (DFS)
-* Object-Oriented Programming (OOP)
-* Bitwise Operations
-* Custom Sorting Algorithms
-* Functional Programming
-
----
-
-## 📊 Output Example
-
-* Total Generation vs Demand
-* Actual Consumption after Shedding
-* Shedded Load by Priority (Critical / High / Normal)
-
----
-
-## 🛠️ Technologies Used
-
-* Python
-* MATLAB
-* CSV-based data handling
-
----
-
-## 📎 Future Improvements
-
-* Replace basic sorting with optimized algorithms
-* Add real-time simulation capabilities
-* Integrate machine learning for predictive load management
-* Develop a GUI dashboard
-
----
-
-## 👤 Authors
-
-* Alborz Seifaei
-* Nima Soltani
-
----
-
-## 📜 License
-
-
-
-
-
-## 📄 Project Specification
-
-You can find the full project description here:  
-[Project PDF](FP.pdf)
-
-This project is developed for academic purposes as part of an undergraduate programming course.
+MIT
