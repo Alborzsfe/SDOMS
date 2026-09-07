@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+devices.csv
+topology.csv
+simulation_results.csv
+plots/
